@@ -37,7 +37,10 @@ public:
   static constexpr size_t externalHeapOffset() { return offsetof(App, m_externalHeap); }
   #pragma GCC diagnostic pop
 
-  static constexpr int k_externalHeapSize = 107674;
+  /* Raised from 107674 (and Poincare TreePool shrunk accordingly, see
+   * poincare/include/poincare/tree_pool.h) so external apps such as the
+   * Peanut-GBC emulator get enough heap for their WRAM/VRAM/cart-RAM buffers. */
+  static constexpr int k_externalHeapSize = 119450;
 #endif
 private:
   App(Snapshot * snapshot);

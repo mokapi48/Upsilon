@@ -23,9 +23,13 @@ public:
   static constexpr char funcExtension[] = "func";
   static constexpr char seqExtension[] = "seq";
 #ifdef _FXCG
-  constexpr static size_t k_storageSize = 64400;
+  /* Reduced from 64400 to 49152 (48 KiB) to keep the total SRAM usage within
+   * budget on recent compilers (GCC 15 overflows .bss by ~11 KB) while keeping
+   * a large external-apps heap for emulators (see Home::App::k_externalHeapSize).
+   * Still enough for scripts + compressed external-app saves. */
+  constexpr static size_t k_storageSize = 49152;
 #else
-  constexpr static size_t k_storageSize = 65012;
+  constexpr static size_t k_storageSize = 49152;
 #endif
   static_assert(UINT16_MAX >= k_storageSize, "record_size_t not big enough");
 

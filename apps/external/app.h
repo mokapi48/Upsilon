@@ -29,7 +29,9 @@ private:
   MainController m_mainController;
   StackViewController m_stackViewController;
   Window * m_window;
-  static constexpr int k_externalHeapSize = 99000;
+  /* Kept in sync with Home::App::k_externalHeapSize (same +11776 delta,
+   * paid for by the Poincare TreePool shrink). */
+  static constexpr int k_externalHeapSize = 110776;
   char m_externalHeap[k_externalHeapSize];
 };
 

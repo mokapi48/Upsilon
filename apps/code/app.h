@@ -75,7 +75,10 @@ public:
 
   VariableBoxController * variableBoxController() { return &m_variableBoxController; }
 
-  static constexpr int k_pythonHeapSize = 85986;
+  /* Reduced from 85986 to 77824 to keep the total SRAM usage within budget
+   * on recent compilers (GCC 15 overflows the .bss by ~11 KB, see
+   * bootloader_common.ld .heap section). Still ~4x Epsilon's stock heap. */
+  static constexpr int k_pythonHeapSize = 77824;
 
 private:
   /* Python delegate:

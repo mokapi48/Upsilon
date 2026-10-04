@@ -73,9 +73,12 @@ ifeq ($(OS),Windows_NT)
 # can be longer than that because we have quite a lot of object files. To work
 # around this issue, we write the object list in a "target.objs" file, and tell
 # the linker to read its arguments from this file.
+# NOTE: the list is written with GNU make's file function instead of an `echo`,
+# because the sh -c command line itself exceeds the 32 767-character
+# CreateProcess limit with ~1500 object files (make e=206 on native Windows).
 $(eval $(call rule_for, \
   LD, %.$$(EXE), , \
-  echo $$^ > $$@.objs && $$(LD) @$$@.objs $$(LDFLAGS) -o $$@ && rm $$@.objs, \
+  $$(file >$$@.objs,$$^)$$(LD) @$$@.objs $$(LDFLAGS) -o $$@ && rm $$@.objs, \
   global \
 ))
 else

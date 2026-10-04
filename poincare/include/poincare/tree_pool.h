@@ -54,7 +54,12 @@ public:
   void reset();
 
 private:
-  constexpr static int BufferSize = 38600;
+  /* Reduced from 38600 to 20480 to give the difference to the external apps
+   * heap (Home::App::k_externalHeapSize / External::App::k_externalHeapSize)
+   * and to compensate the larger .bss produced by recent compilers (GCC 15).
+   * Near-zero-sum tradeoff: keeps RAM usage in budget while letting emulators
+   * (e.g. Peanut-GBC) allocate their working buffers. */
+  constexpr static int BufferSize = 20480;
   constexpr static int MaxNumberOfNodes = BufferSize/sizeof(TreeNode);
   constexpr static int k_maxNodeOffset = BufferSize/ByteAlignment;
 
