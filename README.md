@@ -263,7 +263,7 @@ You can now go to step 2!
 Clone repo and use 'upsilon-dev' branch by pasting these two commands:
 
 ```bash
-git clone --recursive https://github.com/UpsilonNumworks/Upsilon.git
+git clone --recursive https://github.com/mokapi48/Upsilon.git
 cd Upsilon
 git checkout upsilon-dev
 ```
